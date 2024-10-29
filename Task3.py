@@ -12,6 +12,41 @@ with open('calls.csv', 'r') as f:
     reader = csv.reader(f)
     calls = list(reader)
 
+a_result = []
+
+for item in calls:
+    if (
+        item[0].startswith("(080)")
+        and item[0] not in a_result
+        and (
+            item[1].startswith("(0")
+            or item[1].startswith("7")
+            or item[1].startswith("8")
+            or item[1].startswith("9")
+            or item[1].startswith("140")
+        )
+    ):
+        a_result.append(item[0])
+print(f"The numbers called by people in Bangalore have codes:")
+for i in a_result:
+    print(i)
+
+b_result = []
+b_result_1 = []
+for item in calls:
+    if item[0].startswith("(080)") and item[0] not in b_result:
+        b_result.append(item[0])
+        if item[1].startswith("(080)"):
+            b_result_1.append(item[0])
+result = 0
+if len(b_result) > 0:
+    result = len(b_result_1) / len(b_result) * 100
+
+
+print(
+    f"{result:.2f} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore."
+)
+
 """
 TASK 3:
 (080) is the area code for fixed line telephones in Bangalore.

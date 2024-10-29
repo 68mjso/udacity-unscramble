@@ -12,6 +12,24 @@ with open('calls.csv', 'r') as f:
     reader = csv.reader(f)
     calls = list(reader)
 
+text_arr_0 = []
+text_arr_1 = []
+for item in texts:
+    text_arr_0.append(item[0])
+    text_arr_1.append(item[1])
+tele_arr = []
+for item in calls:
+    if (
+        item[0].startswith("140")
+        and item[0] not in tele_arr
+        and item[0] not in text_arr_0
+        and item[0] not in text_arr_1
+    ):
+        tele_arr.append(item[0])
+print("These numbers could be telemarketers:")
+for item in tele_arr:
+    print(item)
+
 """
 TASK 4:
 The telephone company want to identify numbers that might be doing
